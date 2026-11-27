@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>দূরাগত বাতাসের চিঠি</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#2f86e3">
+  <script>
+    (function () {
+      var t = null; try { t = localStorage.getItem('chithi.theme'); } catch (e) {}
+      if (!t) t = (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/noto-serif-bengali-bengali-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ============ হোম + পাসওয়ার্ড ============ -->
+  <section id="home" class="home" aria-label="হোম">
+    <h1 class="sr-only">দূরাগত বাতাসের চিঠি</h1>
+    <button id="themeHome" class="ibtn theme-toggle home-theme" type="button"></button>
+    <button id="lockBtn" class="btn btn-ghost lock" type="button" hidden>লক করুন</button>
+
+    <div class="home-inner">
+      <img class="title-art" src="assets/title.webp" width="1100" height="1232" alt="দূরাগত বাতাসের চিঠি">
+
+      <form id="gate" class="gate" autocomplete="off">
+        <label class="sr-only" for="pw">পাসওয়ার্ড</label>
+        <input id="pw" type="password" placeholder="পাসওয়ার্ড" autocomplete="current-password" required>
+        <button class="btn btn-primary" type="submit">প্রবেশ করুন</button>
+        <label class="remember"><input type="checkbox" id="remember"> এই ডিভাইসে ৩০ দিন মনে রাখুন</label>
+        <p id="gateMsg" class="gate-msg" role="alert"></p>
+      </form>
+
+      <nav id="homeNav" class="home-nav" aria-label="মূল মেনু" hidden>
+        <button id="goWrite" class="btn btn-primary" type="button" data-ico="pen">চিঠি লিখুন</button>
+        <button id="goList" class="btn btn-light" type="button" data-ico="mail">আমার চিঠি <span class="count" id="homeCount">০</span></button>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ============ লেখার জায়গা ============ -->
+  <section id="app" class="app" aria-label="চিঠি লেখার জায়গা" hidden>
+    <header class="appbar">
+      <div class="appbar-in">
+        <button id="backBtn" class="ibtn" type="button" aria-label="ফিরে যান" title="ফিরে যান" data-ico="back"></button>
+        <div class="doc"><b id="docTitle">নতুন চিঠি</b><span id="wordCount">০ শব্দ</span></div>
+        <button id="themeApp" class="ibtn theme-toggle" type="button"></button>
+        <button id="newBtn" class="hbtn" type="button" data-ico="plus" title="নতুন চিঠি"><span class="lbl">নতুন চিঠি</span></button>
+        <button id="listBtn" class="hbtn dark" type="button" data-ico="mail" title="আমার চিঠি"><span class="lbl">আমার চিঠি</span></button>
+      </div>
+    </header>
+
+    <div class="shell">
+      <aside class="side-left">
+        <div id="toolbar" class="panel toolbar" role="toolbar" aria-label="লেখার সরঞ্জাম"></div>
+      </aside>
+
+      <div class="sheet-wrap">
+        <article id="paper" class="paper p-letter">
+          <div class="deco deco-top" aria-hidden="true"></div>
+          <div class="deco deco-bottom" aria-hidden="true"></div>
+          <div class="content">
+            <div id="fDate" class="fld f-date" contenteditable="true" spellcheck="false" data-ph="তারিখ"></div>
+            <div id="fSal" class="fld f-sal" contenteditable="true" spellcheck="false" data-ph="প্রিয় …,"></div>
+            <div id="fBody" class="fld f-body" contenteditable="true" spellcheck="false" data-ph="এখানে মনের কথা লিখুন…"></div>
+            <div id="fClose" class="fld f-close" contenteditable="true" spellcheck="false" data-ph="ইতি, …"></div>
+          </div>
+        </article>
+      </div>
+
+      <aside class="side-right">
+        <section class="panel papers" aria-label="কাগজের ধরন">
+          <h3 class="panel-h">কাগজ</h3>
+          <div class="tiles" role="group" aria-label="কাগজের ধরন">
+            <button class="paper-tile" type="button" data-k="letter" aria-pressed="true"><span class="sw-t t-letter">আ</span><span class="tl">আকাশি</span></button>
+            <button class="paper-tile" type="button" data-k="plain" aria-pressed="false"><span class="sw-t t-plain">আ</span><span class="tl">সাদা</span></button>
+            <button class="paper-tile" type="button" data-k="lined" aria-pressed="false"><span class="sw-t t-lined">আ</span><span class="tl">রুল টানা</span></button>
+            <button class="paper-tile" type="button" data-k="night" aria-pressed="false"><span class="sw-t t-night">আ</span><span class="tl">রাত</span></button>
+          </div>
+        </section>
+
+        <footer class="actions">
+          <h3 class="panel-h">চিঠি</h3>
+          <div class="btns">
+            <button id="saveBtn" class="abtn primary" type="button" data-ico="save">সংরক্ষণ</button>
+            <button id="pdfBtn" class="abtn" type="button" data-ico="down">PDF</button>
+            <button id="jpgBtn" class="abtn" type="button" data-ico="image">JPG</button>
+            <button id="delBtn" class="abtn danger" type="button" data-ico="trash">মুছুন</button>
+          </div>
+          <div class="stat"><span id="status">অসংরক্ষিত</span><span id="syncState">—</span></div>
+        </footer>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============ আমার চিঠি (ড্রয়ার) ============ -->
+  <div id="scrim" class="scrim" hidden></div>
+  <aside id="drawer" class="drawer" aria-label="আমার চিঠি" aria-hidden="true">
+    <div class="drawer-head">
+      <h2>আমার চিঠি</h2>
+      <button id="drawerClose" class="ibtn" type="button" aria-label="বন্ধ করুন"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <div id="list" class="list"></div>
+  </aside>
+
+  <!-- নিশ্চিতকরণ -->
+  <dialog id="dlg">
+    <form method="dialog">
+      <p id="dlgText"></p>
+      <div class="dlg-btns">
+        <button class="abtn" value="cancel">থাক</button>
+        <button id="dlgOk" class="abtn primary" value="ok">ঠিক আছে</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+  <script src="js/app.js" defer></script>
+</body>
+</html>

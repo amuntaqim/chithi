@@ -1,0 +1,7 @@
+{
+  "name": "chithi",
+  "private": true,
+  "version": "2.0.0",
+  "description": "Bengali letter-writing site with password login and cross-device sync",
+  "engines": { "node": ">=18" }
+}
